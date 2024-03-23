@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { VSCODE_GIT_IPC_HANDLE } from './../../.svelte-kit/ambient.d.ts';
 	import { createForm } from 'svelte-forms-lib';
 	import * as yup from 'yup';
 
@@ -23,44 +22,57 @@
 </script>
 
 <div class="flex flex-col items-center justify-center p-6 h-screen">
-	<form class="flex flex-col gap-3 w-96 max-w-full" on:submit={handleSubmit}>
-		<h2 class="text-center text-4xl text-sky-800 font-bold p-3">Inicio de Sesión</h2>
-		<label for="" class="relative border border-teal-700 rounded-lg">
+	<form
+		class="flex flex-col gap-3 w-96 max-w-full h-auto shadow-xl bg-gradient-to-b from-sky-900 to-sky-600 p-6 rounded-lg"
+		on:submit={handleSubmit}
+	>
+		<h2 class="text-center text-4xl text-neutral-100 font-bold p-3">Inicio de Sesión</h2>
+
+		<label
+			for=""
+			class="relative rounded-lg border {$form.email ? 'border-sky-600' : 'border-neutral-100'}"
+		>
 			<span
-				class="absolute left-1 -translate-y-1/2 pointer-events-none rounded px-1 bg-neutral-200 text-neutral-400
-                {$form.email ? 'top-0' : 'top-1/2'} duration-300"
+				class="absolute left-1 -translate-y-1/2 pointer-events-none rounded px-1 bg-sky-600 text-neutral-100
+                {$form.email ? 'top-0' : 'top-1/2 opacity-0'} duration-300"
 			>
 				Email
 			</span>
 			<input
 				on:change={handleChange}
 				bind:value={$form.email}
+				placeholder="Email"
 				type="email"
-				class="w-full border-0 bg-transparent text-neutral-800 p-3 focus:outline-0"
+				class="w-full border-0 bg-transparent text-neutral-100 p-3 focus:outline-0 placeholder:text-neutral-100"
 			/>
 		</label>
-		<label for="" class="relative border-2 border-teal-700 rounded-lg">
+
+		<label
+			for=""
+			class="relative rounded-lg border {$form.password ? 'border-sky-600' : 'border-neutral-100'}"
+		>
 			<span
-				class="absolute left-1 -translate-y-1/2 pointer-events-none rounded px-1 bg-neutral-200 text-neutral-400
-                {$form.password ? 'top-0' : 'top-1/2'} duration-300"
+				class="absolute left-1 -translate-y-1/2 pointer-events-none rounded px-1 bg-sky-600 text-neutral-100
+		{$form.password ? 'top-0' : 'top-1/2 opacity-0'} duration-300"
 			>
 				Clave
 			</span>
 			<input
 				on:change={handleChange}
 				bind:value={$form.password}
+				placeholder="Clave"
 				type="password"
-				class="w-full border-0 bg-transparent text-neutral-800 p-3 focus:outline-0"
+				class="w-full border-0 bg-transparent text-neutral-100 p-3 focus:outline-0 placeholder:text-neutral-100"
 			/>
 		</label>
+
 		{#if $errors.email || $errors.password}
 			<small class="text-red-700 text-center">Debe ingresar los datos de Email y Clave</small>
 		{/if}
+
 		<button
 			type="submit"
-			class=" rounded-lg p-3 text-neutral-100 font-semibold text-xl {!$form.email || !$form.password
-				? 'bg-neutral-500'
-				: 'bg-sky-800'}"
+			class="rounded-lg p-3 text-sky-800 font-semibold text-xl bg-neutral-100 shadow-xl"
 			disabled={!$form.email || !$form.password}
 		>
 			Ingresar
