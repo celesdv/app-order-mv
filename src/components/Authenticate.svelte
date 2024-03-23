@@ -1,6 +1,13 @@
 <script lang="ts">
 	import { createForm } from 'svelte-forms-lib';
 	import * as yup from 'yup';
+	import Button from './buttons/Button.svelte';
+	import { authHandlers } from '../store/store';
+	import Spinner from './loaders/spinner.svelte';
+
+	let disabled: boolean = true;
+	let loading: boolean = false;
+	let error: boolean = false;
 
 	const { form, errors, handleChange, handleSubmit } = createForm({
 		initialValues: {
@@ -11,14 +18,26 @@
 			email: yup.string().email().required(),
 			password: yup.string().required()
 		}),
-		onSubmit: (values) => {
-			handleAuthenticate(values);
+		onSubmit: async (values) => {
+			await handleAuthenticate(values);
 		}
 	});
 
-	function handleAuthenticate(values: any) {
-		console.log(values);
+	async function handleAuthenticate(values: any) {
+		error = false;
+		loading = true;
+		let email = values.email;
+		let password = values.password;
+		try {
+			await authHandlers.login(email, password);
+		} catch (err) {
+			error = true;
+			loading = false;
+			console.log(err);
+		}
 	}
+
+	$: disabled = !$form.email || !$form.password;
 </script>
 
 <div class="flex flex-col items-center justify-center p-6 h-screen">
@@ -67,15 +86,25 @@
 		</label>
 
 		{#if $errors.email || $errors.password}
-			<small class="text-red-700 text-center">Debe ingresar los datos de Email y Clave</small>
+			<small class="text-red-400 text-center"
+				>Debe ingresar los datos de Email y Clave para iniciar sesión</small
+			>
 		{/if}
 
-		<button
-			type="submit"
-			class="rounded-lg p-3 text-sky-800 font-semibold text-xl bg-neutral-100 shadow-xl"
-			disabled={!$form.email || !$form.password}
-		>
-			Ingresar
-		</button>
+		{#if error}
+			<small class="text-red-400 text-center">Email o clave incorrectas. Revise sus datos</small>
+		{/if}
+
+		{#if loading}
+			<div class="flex w-full justify-center">
+				<Spinner size="2rem" color="#f5f5f5" />
+			</div>
+		{:else}
+			<Button
+				title="Ingresar"
+				variants="rounded-lg p-3 text-sky-800 font-semibold text-xl bg-gradient-to-b from-neutral-100 to-neutral-400 shadow-xl"
+				bind:disabled
+			/>
+		{/if}
 	</form>
 </div>

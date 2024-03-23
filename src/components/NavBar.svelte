@@ -1,7 +1,10 @@
 <script lang="ts">
+	import { authHandlers } from "../store/store";
 	import Button from "./buttons/Button.svelte";
 
-
+    function logOut() {
+        authHandlers.logout()
+    }
 </script>
 
 <header class="w-full bg-sky-800 flex items-center">
@@ -9,6 +12,6 @@
         <div class="text-lg">
             <span class="font-bold">Melcej</span><span class="italic">Viajes</span>
         </div>
-        <Button title='Salir'/>
+        <Button title='Salir' on:click={()=>logOut()}/>
     </div>
 </header>
