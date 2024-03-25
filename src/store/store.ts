@@ -16,3 +16,14 @@ export const authHandlers = {
 		await signOut(auth);
 	}
 };
+
+export const activoAccordion = writable('')
+
+export const accordionHandler = {
+    set: (element: string) => {
+        activoAccordion.update((value) => {
+            value = element
+            return value
+        })
+    },
+}

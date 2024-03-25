@@ -1,4 +1,4 @@
-<script lang="ts">
+<script lang='ts'>
 	import '../app.css';
 	import { auth, db } from '$lib/firebase/firebase';
 	import { getDoc, doc, setDoc, type DocumentData } from 'firebase/firestore';
@@ -8,7 +8,7 @@
 	const nonAuthRoutes = ['/'];
 
 	onMount(() => {
-		const unsubscribe = auth.onAuthStateChanged(async (user: any) => {
+		const unsubscribe = auth.onAuthStateChanged(async (user:any) => {
 			const currentPath = window.location.pathname;
 
 			if (!user && !nonAuthRoutes.includes(currentPath)) {
@@ -25,7 +25,7 @@
 				return;
 			}
 
-			let dataToSetToStore: DocumentData = {};
+			let dataToSetToStore: DocumentData ={};
 			const docRef = doc(db, 'users', user.uid);
 			const docSnap = await getDoc(docRef);
 
@@ -45,10 +45,9 @@
 			});
 		});
 	});
+
 </script>
 
-<div
-	class="min-h-screen max-h-screen bg-gradient-to-t from-sky-950 to-neutral-100 relative flex flex-col"
->
+<div class="min-h-screen max-h-screen bg-gradient-to-t from-sky-950 to-neutral-100 relative flex flex-col">
 	<slot />
 </div>
