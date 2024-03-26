@@ -7,7 +7,11 @@ export interface dataOrder {
 	revenues?: revenuesModel[];
 	payments?: paymentModel[];
 	taxes?: taxModel[];
-	balance?: number;
+	ars_value: number;
+	usd_value: number;
+	currency_value: number;
+	total_revenues: number;
+	total_payments: number;
 }
 
 export interface clientModel {
@@ -19,7 +23,6 @@ export interface clientModel {
 	adress: string;
 	city: string;
 	observation: string;
-	revenues: revenuesModel[]
 }
 
 export interface supplierModel {
@@ -35,7 +38,7 @@ export interface productModel {
 	currency: string;
 	usd_value: number;
 	balance?: number;
-	payments: paymentModel[]
+	payments: paymentModel[];
 }
 
 export interface revenuesModel {

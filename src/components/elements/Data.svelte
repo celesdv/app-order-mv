@@ -4,20 +4,26 @@
 	import Save from 'svelte-material-icons/Send.svelte';
 	import IconButton from './../buttons/IconButton.svelte';
 	import type { dataOrder } from './../../interfaces/general.ts';
+	import { orderBy } from 'firebase/firestore';
 
 	let datos: dataOrder = {
 		id: 1,
 		order_name: 'Fernandez',
 		date: new Date(),
-		client: {			
+		client: {
 			first_name: 'Juan Pedro',
-			last_name:'Fernandez',
+			last_name: 'Fernandez',
 			phone: 2634625679,
 			email: 'email@email.com',
 			adress: 'Lamadrid 2525',
 			city: 'Rivadavia',
 			observation: ''
-		}
+		},
+		ars_value: 11000 * 870,
+		usd_value: 11000,
+		currency_value: 870,
+		total_revenues: 150,
+		total_payments: 200
 	};
 	let readonly: boolean = true;
 </script>
@@ -47,38 +53,72 @@
 			</IconButton>
 		</div>
 
+		<div class="w-full">
+			<h2 class="uppercase font-semibold text-sky-800">Datos Cliente</h2>
+		</div>
+
 		<div class="flex">
-			<label for="" class="flex space-x-1 w-1/2 px-2 items-center">
+			<label for="" class="flex space-x-1 w-1/2 px-4 items-center">
 				<span class="text-sky-800 font-semibold">Nombre:</span>
-				<input type="text" bind:value={datos.client.first_name} class="grow p-1 bg-transparent" {readonly} />
+				<input
+					type="text"
+					bind:value={datos.client.first_name}
+					class="grow p-1 bg-transparent"
+					{readonly}
+				/>
 			</label>
-			<label for="" class="flex space-x-1 w-1/2 px-2 items-center">
+			<label for="" class="flex space-x-1 w-1/2 px-4 items-center">
 				<span class="text-sky-800 font-semibold">Apellido:</span>
-				<input type="text" bind:value={datos.client.last_name} class="grow p-1 bg-transparent" {readonly} />
+				<input
+					type="text"
+					bind:value={datos.client.last_name}
+					class="grow p-1 bg-transparent"
+					{readonly}
+				/>
 			</label>
 		</div>
 		<div class="flex">
-			<label for="" class="flex space-x-1 w-1/2 px-2 items-center">
+			<label for="" class="flex space-x-1 w-1/2 px-4 items-center">
 				<span class="text-sky-800 font-semibold">E-mail:</span>
-				<input type="email" bind:value={datos.client.email} class="grow p-1 bg-transparent" {readonly} />
+				<input
+					type="email"
+					bind:value={datos.client.email}
+					class="grow p-1 bg-transparent"
+					{readonly}
+				/>
 			</label>
-			<label for="" class="flex space-x-1 w-1/2 px-2 items-center">
+			<label for="" class="flex space-x-1 w-1/2 px-4 items-center">
 				<span class="text-sky-800 font-semibold">Télefono:</span>
-				<input type="text" bind:value={datos.client.phone} class="grow p-1 bg-transparent" {readonly} />
+				<input
+					type="text"
+					bind:value={datos.client.phone}
+					class="grow p-1 bg-transparent"
+					{readonly}
+				/>
 			</label>
 		</div>
 		<div class="flex">
-			<label for="" class="flex space-x-1 w-1/2 px-2 items-center">
+			<label for="" class="flex space-x-1 w-1/2 px-4 items-center">
 				<span class="text-sky-800 font-semibold">Domicilio:</span>
-				<input type="email" bind:value={datos.client.adress} class="grow p-1 bg-transparent" {readonly} />
+				<input
+					type="email"
+					bind:value={datos.client.adress}
+					class="grow p-1 bg-transparent"
+					{readonly}
+				/>
 			</label>
-			<label for="" class="flex space-x-1 w-1/2 px-2 items-center">
+			<label for="" class="flex space-x-1 w-1/2 px-4 items-center">
 				<span class="text-sky-800 font-semibold">Localidad:</span>
-				<input type="text" bind:value={datos.client.city} class="grow p-1 bg-transparent" {readonly} />
+				<input
+					type="text"
+					bind:value={datos.client.city}
+					class="grow p-1 bg-transparent"
+					{readonly}
+				/>
 			</label>
 		</div>
 		<div class="flex">
-			<label for="" class="flex space-x-1 w-full px-2 items-center">
+			<label for="" class="flex space-x-1 w-full px-4 items-center">
 				<span class="text-sky-800 font-semibold">Observaciones:</span>
 				<textarea
 					name=""
@@ -88,6 +128,50 @@
 					bind:value={datos.client.observation}
 					{readonly}
 				></textarea>
+			</label>
+		</div>
+		<div class="w-full mt-3">
+			<h2 class="uppercase font-semibold text-sky-800">Datos Reserva</h2>
+		</div>
+		<div class="flex">
+			<label for="" class="flex space-x-1 w-1/3 px-4 items-center">
+				<span class="text-sky-800 font-semibold">USD:</span>
+				<input
+					type="number"
+					bind:value={datos.usd_value}
+					class="grow p-1 bg-transparent"
+					{readonly}
+				/>
+			</label>
+			<label for="" class="flex space-x-1 w-1/3 px-4 items-center">
+				<span class="text-sky-800 font-semibold">Cambio:</span>
+				<input
+					type="number"
+					bind:value={datos.currency_value}
+					class="grow p-1 bg-transparent"
+					{readonly}
+				/>
+			</label>
+			<label for="" class="flex space-x-1 w-1/3 px-4 items-center">
+				<span class="text-sky-800 font-semibold">ARS:</span>
+				<input
+					type="number"
+					bind:value={datos.ars_value}
+					class="grow p-1 bg-transparent"
+					{readonly}
+				/>
+			</label>
+		</div>
+		<div class="flex">
+			<label for="" class="flex space-x-1 w-1/2 px-4 items-center">
+				<span class="text-sky-800 font-semibold">Cobros en USD:</span>
+				<p class="p-1">{datos.total_revenues}</p>
+			</label>
+		</div>
+		<div class="flex">
+			<label for="" class="flex space-x-1 w-1/2 px-4 items-center">
+				<span class="text-sky-800 font-semibold">Pagos en USD:</span>
+				<p class="p-1">{datos.total_payments}</p>
 			</label>
 		</div>
 	</div>

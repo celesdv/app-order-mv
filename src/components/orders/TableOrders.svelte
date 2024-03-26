@@ -25,12 +25,15 @@
 					>
 						<Drop />
 					</IconButton>
-					<IconButton size="h-5" on:click={() => console.log('Ver')}>
+					<IconButton
+						size="h-5"
+						on:click={() => console.log('Ver')}
+						variant="bg-gradient-to-b from-neutral-400 to-neutral-600 text-neutral-100"
+					>
 						<Expand />
 					</IconButton>
 				</td>
 			</tr>
-
 		</tbody>
 	</table>
 </div>

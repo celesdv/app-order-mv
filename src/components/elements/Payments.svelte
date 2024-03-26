@@ -61,7 +61,7 @@
 			{#each products as prod}
 				<div class="flex justify-between text-center space-x-4">
 					<div
-						class="flex p-2 divide-x rounded-full w-full bg-gradient-to-t from-teal-500 to-teal-800 text-neutral-100 shadow-lg"
+						class="flex items-center divide-x rounded-full w-full bg-gradient-to-t from-teal-500 to-teal-800 text-neutral-100 shadow-lg"
 					>
 						<div class="px-1 w-1/3">Producto: {prod.description}</div>
 						<div class="px-1 w-1/3">Proveedor: {prod.supplier.name}</div>
@@ -78,10 +78,10 @@
 				{#if prod.payments.length > 0}
 					<div class="flex space-x-4 my-3">
 						<div
-							class="flex flex-col items-center justify-center h-fit p-2 divide-y rounded w-1/3 bg-gradient-to-t from-red-400 to-red-800 text-neutral-100 shadow-lg"
+							class="flex flex-col items-center justify-center h-fit divide-y rounded w-1/3 bg-gradient-to-t from-red-400 to-red-800 text-neutral-100 shadow-lg"
 						>
-							<div class="p-1 w-full">Total: {sumaPagos(prod)} {prod.currency}</div>
-							<div class="p-1 w-full">Saldos: {prod.value - sumaPagos(prod)} {prod.currency}</div>
+							<div class="p-2 text-center w-full">Total: {sumaPagos(prod)} {prod.currency}</div>
+							<div class="p-2 text-center w-full">Saldos: {prod.value - sumaPagos(prod)} {prod.currency}</div>
 						</div>
 						<table class="w-full text-sm text-center text-gray-500">
 							<thead class="text-sky-800 uppercase">
