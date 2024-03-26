@@ -30,6 +30,7 @@
 					</IconButton>
 				</td>
 			</tr>
+
 		</tbody>
 	</table>
 </div>

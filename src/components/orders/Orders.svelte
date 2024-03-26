@@ -8,8 +8,10 @@
 </script>
 
 <div class="w-1/3 h-full p-2 max-h-[85vh]">
+	<Header title="Proveedores" on:click={() => handleClick()} />
+	<Header title="Clientes" on:click={() => handleClick()} />
 	<Header title="Reservas" on:click={() => handleClick()} />
-	<div class="max-h-[75vh] overflow-y-auto mt-4">
+	<div class="max-h-[70vh] overflow-y-auto mt-4">
 		<TableOrders />
 	</div>
 </div>

@@ -1,10 +1,9 @@
 <script lang="ts">
 	import Plus from 'svelte-material-icons/Plus.svelte';
 	import Edit from 'svelte-material-icons/Pencil.svelte';
-	import Delete from 'svelte-material-icons/Delete.svelte';
-	import type { revenuesModel } from '../../interfaces/general';
+	import Delete from 'svelte-material-icons/Delete.svelte';	
 	import IconButton from '../buttons/IconButton.svelte';
-	import SearchInput from '../inputs/SearchInput.svelte';
+	import type { revenuesModel } from '../../interfaces/general';
 
 	let revenues: revenuesModel[] = [
 		{ date: new Date(), ars_value: 15000, currency_value: 100, usd_value: 15000 / 100 }
@@ -46,7 +45,7 @@
 				<p>Añadir</p>
 			</IconButton>
 		</div>
-		<div class="relative max-h-[18rem] h-[18rem] overflow-y-auto mt-2">
+		<div class="relative max-h-[21rem] h-[21rem] overflow-y-auto mt-2">
 			<table class="w-full text-sm text-center text-gray-500">
 				<thead class="text-sky-800 uppercase">
 					<tr>

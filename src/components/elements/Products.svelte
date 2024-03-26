@@ -7,7 +7,15 @@
 	import SearchInput from '../inputs/SearchInput.svelte';
 
 	let products: productModel[] = [
-		{ id: 1, description: 'aaa', supplier: { name: 'Mitika' }, value: 150, currency: 'USD' }
+		{
+			id: 1,
+			description: 'aaa',
+			supplier: { name: 'Mitika' },
+			value: 150,
+			currency: 'USD',
+			payments: [],
+			usd_value: 150
+		}
 	];
 </script>
 
@@ -22,7 +30,7 @@
 				<p>Añadir</p>
 			</IconButton>
 		</div>
-		<div class="relative max-h-[18rem] h-[18rem] overflow-y-auto mt-2">
+		<div class="relative max-h-[21rem] h-[21rem] overflow-y-auto mt-2">
 			<table class="w-full text-sm text-left text-gray-500">
 				<thead class="text-sky-800 uppercase">
 					<tr>

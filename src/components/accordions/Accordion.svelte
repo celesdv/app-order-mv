@@ -1,10 +1,11 @@
 <script lang="ts">
-	import { boolean } from 'yup';
 	import { activoAccordion } from '../../store/store';
-	import Data from '../elements/Data.svelte';
 	import ItemAccordion from './ItemAccordion.svelte';
+	import Data from '../elements/Data.svelte';
 	import Products from '../elements/Products.svelte';
 	import Revenues from '../elements/Revenues.svelte';
+	import Payments from '../elements/Payments.svelte';
+	import Taxes from '../elements/Taxes.svelte';
 
 	export let sections: string[] = ['Datos Reserva', 'Productos', 'Cobros', 'Pagos', 'Impuestos'];
 </script>
@@ -18,10 +19,10 @@
 			<Products />
 		{:else if index === 2}
 			<Revenues />
+		{:else if index === 3}
+			<Payments />
 		{:else}
-			<div>
-				hola {element}
-			</div>
+			<Taxes />
 		{/if}
 	{/if}
 {/each}

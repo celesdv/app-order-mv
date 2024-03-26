@@ -19,6 +19,7 @@ export interface clientModel {
 	adress: string;
 	city: string;
 	observation: string;
+	revenues: revenuesModel[]
 }
 
 export interface supplierModel {
@@ -32,13 +33,13 @@ export interface productModel {
 	supplier: supplierModel;
 	value: number;
 	currency: string;
-	usd_value?: number;
+	usd_value: number;
 	balance?: number;
+	payments: paymentModel[]
 }
 
 export interface revenuesModel {
 	id?: number;
-	client?: clientModel;
 	date: Date;
 	ars_value: number;
 	currency_value: number;
@@ -47,12 +48,10 @@ export interface revenuesModel {
 
 export interface paymentModel {
 	id?: number;
-	supplier: supplierModel;
-	product: productModel;
 	date: Date;
-	value: number;
-	currency: string;
-	usd_value?: number;
+	ars_value: number;
+	currency_value: number;
+	usd_value: number;
 }
 
 export interface taxModel {

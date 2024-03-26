@@ -23,7 +23,7 @@
 </script>
 
 <div class="px-2">
-	<div class="p-2 fondo-translucent max-h-[22rem] h-[22rem] overflow-y-auto">
+	<div class="p-2 fondo-translucent max-h-[25rem] h-[25rem] overflow-y-auto">
 		<div class="flex justify-between text-sky-800">
 			<div class="flex space-x-1 items-center">
 				<Book />

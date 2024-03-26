@@ -10,7 +10,6 @@
 {#if !$authStore.loading}
 	<NavBar />
 	<Body />
-	<Footer />
 {:else}
 	<div class="flex w-full mt-[10%] justify-center">
 		<Spinner size="12rem" color="#f5f5f5" />
