@@ -4,6 +4,7 @@
 	import Data from '../elements/Data.svelte';
 	import ItemAccordion from './ItemAccordion.svelte';
 	import Products from '../elements/Products.svelte';
+	import Revenues from '../elements/Revenues.svelte';
 
 	export let sections: string[] = ['Datos Reserva', 'Productos', 'Cobros', 'Pagos', 'Impuestos'];
 </script>
@@ -15,6 +16,8 @@
 			<Data />
 		{:else if index === 1}
 			<Products />
+		{:else if index === 2}
+			<Revenues />
 		{:else}
 			<div>
 				hola {element}

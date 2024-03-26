@@ -2,19 +2,43 @@
 	import Plus from 'svelte-material-icons/Plus.svelte';
 	import Edit from 'svelte-material-icons/Pencil.svelte';
 	import Delete from 'svelte-material-icons/Delete.svelte';
-	import type { productModel } from '../../interfaces/general';
+	import type { revenuesModel } from '../../interfaces/general';
 	import IconButton from '../buttons/IconButton.svelte';
 	import SearchInput from '../inputs/SearchInput.svelte';
 
-	let products: productModel[] = [
-		{ id: 1, description: 'aaa', supplier: { name: 'Mitika' }, value: 150, currency: 'USD' }
+	let revenues: revenuesModel[] = [
+		{ date: new Date(), ars_value: 15000, currency_value: 100, usd_value: 15000 / 100 }
 	];
+	let tarifa: number = 2000;
+	let currency: string = 'USD';
+
+	const sumaPagos = () => {
+		let total: number = 0;
+		if (currency === 'ARS') {
+			revenues.forEach((element) => {
+				total = total + element.ars_value;
+			});
+		} else {
+			revenues.forEach((element) => {
+				total = total + element.usd_value;
+			});
+		}
+
+		return total;
+	};
 </script>
 
 <div class="px-2">
 	<div class="p-2 fondo-translucent">
-		<div class="flex justify-between">
-			<SearchInput />
+		<div class="flex justify-between text-center space-x-4">
+			<div
+				class="flex p-2 divide-x rounded-full w-full bg-gradient-to-t from-teal-500 to-teal-800 text-neutral-100 shadow-lg"
+			>
+				<div class="px-2 w-1/4">Resumen</div>
+				<div class="px-2 w-1/4">Tarifa: {tarifa} {currency}</div>
+				<div class="px-2 w-1/4">Total: {sumaPagos()} {currency}</div>
+				<div class="px-2 w-1/4">Saldos: {tarifa - sumaPagos()} {currency}</div>
+			</div>
 			<IconButton
 				variant="flex items-center justify-center min-w-28 p-2 space-x-1 bg-gradient-to-b from-sky-900 to-sky-600 text-neutral-100 shadow-lg"
 			>
@@ -23,28 +47,24 @@
 			</IconButton>
 		</div>
 		<div class="relative max-h-[18rem] h-[18rem] overflow-y-auto mt-2">
-			<table class="w-full text-sm text-left text-gray-500">
+			<table class="w-full text-sm text-center text-gray-500">
 				<thead class="text-sky-800 uppercase">
 					<tr>
-						<th scope="col" class="px-4 py-2 w-1/3">Descripcion</th>
-						<th scope="col" class="px-4 py-2 w-2/6">Provedor</th>
-						<th scope="col" class="px-4 py-2">Valor</th>
-						<th scope="col" class="px-4 py-2">Moneda</th>
-						<th scope="col" class="px-4 py-2">Balance</th>
-						<th scope="col" class="px-4 py-2">Acciones</th>
+						<th scope="col" class="px-4 py-2">Fecha</th>
+						<th scope="col" class="px-4 py-2">ARS</th>
+						<th scope="col" class="px-4 py-2">Cambio</th>
+						<th scope="col" class="px-4 py-2">USD</th>
+						<th scope="col" class="px-4 py-2 w-[10%]">Acciones</th>
 					</tr>
 				</thead>
 				<tbody>
-					{#if products.length > 0}
-						{#each products as product}
+					{#if revenues.length > 0}
+						{#each revenues as data}
 							<tr class="border-b border-neutral-100">
-								<td class="p-1 ps-4 text-neutral-700">{product.description}</td>
-								<td class="p-1 text-neutral-700">{product.supplier.name}</td>
-								<td class="p-1 text-neutral-700 text-center">{product.value}</td>
-								<td class="p-1 text-neutral-700 text-center">{product.currency}</td>
-								<td class="p-1 text-neutral-700 text-center">
-									{product.balance ? product.balance : 'Sin pagos'}
-								</td>
+								<td class="p-1 text-neutral-700">{data.date.toLocaleDateString()}</td>
+								<td class="p-1 text-neutral-700">{data.ars_value}</td>
+								<td class="p-1 text-neutral-700">{data.currency_value}</td>
+								<td class="p-1 text-neutral-700">{data.usd_value}</td>
 								<td class="p-2 flex items-center justify-center space-x-1">
 									<IconButton
 										size="h-5"
@@ -61,11 +81,12 @@
 										<Delete />
 									</IconButton></td
 								>
-							</tr>{/each}
+							</tr>
+						{/each}
 					{:else}
 						<tr class="border-b border-neutral-100">
 							<td class="p-1 text-neutral-700 text-center" colspan="4"
-								>No hay productos añadidos aún</td
+								>No hay cobros registrados aún</td
 							>
 						</tr>
 					{/if}

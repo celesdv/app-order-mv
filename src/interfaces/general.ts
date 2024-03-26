@@ -38,28 +38,30 @@ export interface productModel {
 
 export interface revenuesModel {
 	id?: number;
-	client: clientModel;
-	value: number;
-	currency: string;
-	usd_value?: number;
+	client?: clientModel;
+	date: Date;
+	ars_value: number;
+	currency_value: number;
+	usd_value: number;
 }
 
 export interface paymentModel {
 	id?: number;
 	supplier: supplierModel;
 	product: productModel;
+	date: Date;
 	value: number;
 	currency: string;
 	usd_value?: number;
 }
 
 export interface taxModel {
-    id?:number
-    exempt:number
-    not_taxed:number
-    aliquot_10:number
-    aliquot_21:number
-    total:number
-    iva:number
-    bi_iibb:number
+	id?: number;
+	exempt: number;
+	not_taxed: number;
+	aliquot_10: number;
+	aliquot_21: number;
+	total: number;
+	iva: number;
+	bi_iibb: number;
 }
