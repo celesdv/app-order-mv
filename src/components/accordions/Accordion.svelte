@@ -3,6 +3,7 @@
 	import { activoAccordion } from '../../store/store';
 	import Data from '../elements/Data.svelte';
 	import ItemAccordion from './ItemAccordion.svelte';
+	import Products from '../elements/Products.svelte';
 
 	export let sections: string[] = ['Datos Reserva', 'Productos', 'Cobros', 'Pagos', 'Impuestos'];
 </script>
@@ -12,6 +13,8 @@
 	{#if $activoAccordion === element}
 		{#if index === 0}
 			<Data />
+		{:else if index === 1}
+			<Products />
 		{:else}
 			<div>
 				hola {element}

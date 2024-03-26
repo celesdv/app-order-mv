@@ -1,6 +1,5 @@
 <script lang="ts">
-	import Pencil from 'svelte-material-icons/Pencil.svelte';
-	import Delete from 'svelte-material-icons/Delete.svelte';
+	import Drop from 'svelte-material-icons/TrayArrowDown.svelte';
 	import Expand from 'svelte-material-icons/ArrowRight.svelte';
 	import IconButton from '../buttons/IconButton.svelte';
 </script>
@@ -19,11 +18,12 @@
 				<td class="p-1 text-neutral-700">Nombre Cliente</td>
 				<td class="p-1 text-neutral-700">19/09/2024</td>
 				<td class="p-1 text-center">
-					<IconButton size="h-5" on:click={() => console.log('Eliminar')}>
-						<Delete />
-					</IconButton>
-					<IconButton size="h-5" on:click={() => console.log('Editar')}>
-						<Pencil />
+					<IconButton
+						size="h-5"
+						variant="bg-gradient-to-b from-red-400 to-red-800 text-neutral-100"
+						on:click={() => console.log('Archivar')}
+					>
+						<Drop />
 					</IconButton>
 					<IconButton size="h-5" on:click={() => console.log('Ver')}>
 						<Expand />
