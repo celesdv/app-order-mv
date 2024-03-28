@@ -4,7 +4,6 @@
 	import Save from 'svelte-material-icons/Send.svelte';
 	import IconButton from './../buttons/IconButton.svelte';
 	import type { dataOrder } from './../../interfaces/general.ts';
-	import { orderBy } from 'firebase/firestore';
 
 	let datos: dataOrder = {
 		id: 1,
@@ -167,8 +166,6 @@
 				<span class="text-sky-800 font-semibold">Cobros en USD:</span>
 				<p class="p-1">{datos.total_revenues}</p>
 			</label>
-		</div>
-		<div class="flex">
 			<label for="" class="flex space-x-1 w-1/2 px-4 items-center">
 				<span class="text-sky-800 font-semibold">Pagos en USD:</span>
 				<p class="p-1">{datos.total_payments}</p>
@@ -186,6 +183,12 @@
 			rgba(245, 245, 245, 0) 100%
 		);
 	}
+	@media screen and (max-height: 642px) {
+        .fondo-translucent {
+            max-height: 50vh !important;
+			height: 50vh !important;
+        }
+    }
 	::-webkit-scrollbar {
 		width: 8px;
 	}

@@ -45,7 +45,7 @@
 				<p>Añadir</p>
 			</IconButton>
 		</div>
-		<div class="relative max-h-[21rem] h-[21rem] overflow-y-auto mt-2">
+		<div class="relative tabla max-h-[21rem] h-[21rem] overflow-y-auto mt-2">
 			<table class="w-full text-sm text-center text-gray-500">
 				<thead class="text-sky-800 uppercase">
 					<tr>
@@ -60,10 +60,10 @@
 					{#if revenues.length > 0}
 						{#each revenues as data}
 							<tr class="border-b border-neutral-100">
-								<td class="p-1 text-neutral-700">{data.date.toLocaleDateString()}</td>
-								<td class="p-1 text-neutral-700">{data.ars_value}</td>
-								<td class="p-1 text-neutral-700">{data.currency_value}</td>
-								<td class="p-1 text-neutral-700">{data.usd_value}</td>
+								<td class="p-1 text-neutral-800">{data.date.toLocaleDateString()}</td>
+								<td class="p-1 text-neutral-800">{data.ars_value}</td>
+								<td class="p-1 text-neutral-800">{data.currency_value}</td>
+								<td class="p-1 text-neutral-800">{data.usd_value}</td>
 								<td class="p-2 flex items-center justify-center space-x-1">
 									<IconButton
 										size="h-5"
@@ -84,7 +84,7 @@
 						{/each}
 					{:else}
 						<tr class="border-b border-neutral-100">
-							<td class="p-1 text-neutral-700 text-center" colspan="4"
+							<td class="p-1 text-neutral-800 text-center" colspan="4"
 								>No hay cobros registrados aún</td
 							>
 						</tr>
@@ -96,6 +96,11 @@
 </div>
 
 <style>
+	@media screen and (max-height: 642px) {
+        .tabla {
+            max-height: 40vh !important;
+        }
+    }
 	.fondo-translucent {
 		background: linear-gradient(
 			90deg,

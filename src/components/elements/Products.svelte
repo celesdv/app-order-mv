@@ -30,7 +30,7 @@
 				<p>Añadir</p>
 			</IconButton>
 		</div>
-		<div class="relative max-h-[21rem] h-[21rem] overflow-y-auto mt-2">
+		<div class="relative tabla max-h-[21rem] h-[21rem] overflow-y-auto mt-2">
 			<table class="w-full text-sm text-left text-gray-500">
 				<thead class="text-sky-800 uppercase">
 					<tr>
@@ -46,11 +46,11 @@
 					{#if products.length > 0}
 						{#each products as product}
 							<tr class="border-b border-neutral-100">
-								<td class="p-1 ps-4 text-neutral-700">{product.description}</td>
-								<td class="p-1 text-neutral-700">{product.supplier.name}</td>
-								<td class="p-1 text-neutral-700 text-center">{product.value}</td>
-								<td class="p-1 text-neutral-700 text-center">{product.currency}</td>
-								<td class="p-1 text-neutral-700 text-center">
+								<td class="p-1 ps-4 text-neutral-800">{product.description}</td>
+								<td class="p-1 text-neutral-800">{product.supplier.name}</td>
+								<td class="p-1 text-neutral-800 text-center">{product.value}</td>
+								<td class="p-1 text-neutral-800 text-center">{product.currency}</td>
+								<td class="p-1 text-neutral-800 text-center">
 									{product.balance ? product.balance : 'Sin pagos'}
 								</td>
 								<td class="p-2 flex items-center justify-center space-x-1">
@@ -72,7 +72,7 @@
 							</tr>{/each}
 					{:else}
 						<tr class="border-b border-neutral-100">
-							<td class="p-1 text-neutral-700 text-center" colspan="4"
+							<td class="p-1 text-neutral-800 text-center" colspan="4"
 								>No hay productos añadidos aún</td
 							>
 						</tr>
@@ -84,6 +84,11 @@
 </div>
 
 <style>
+	@media screen and (max-height: 642px) {
+        .tabla {
+            max-height: 40vh !important;
+        }
+    }
 	.fondo-translucent {
 		background: linear-gradient(
 			90deg,

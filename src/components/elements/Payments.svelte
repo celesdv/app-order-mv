@@ -27,7 +27,8 @@
 			value: 150,
 			currency: 'USD',
 			payments: [],
-			usd_value: 150
+			usd_value: 150,
+			taxes:{}
 		},
 		{
 			id: 2,
@@ -36,7 +37,8 @@
 			value: 350,
 			currency: 'USD',
 			payments: payments,
-			usd_value: 150
+			usd_value: 150,
+			taxes:{}
 		}
 	];
 
@@ -81,7 +83,10 @@
 							class="flex flex-col items-center justify-center h-fit divide-y rounded w-1/3 bg-gradient-to-t from-red-400 to-red-800 text-neutral-100 shadow-lg"
 						>
 							<div class="p-2 text-center w-full">Total: {sumaPagos(prod)} {prod.currency}</div>
-							<div class="p-2 text-center w-full">Saldos: {prod.value - sumaPagos(prod)} {prod.currency}</div>
+							<div class="p-2 text-center w-full">
+								Saldos: {prod.value - sumaPagos(prod)}
+								{prod.currency}
+							</div>
 						</div>
 						<table class="w-full text-sm text-center text-gray-500">
 							<thead class="text-sky-800 uppercase">
@@ -96,10 +101,10 @@
 							<tbody>
 								{#each prod.payments as data}
 									<tr class="border-b border-neutral-100">
-										<td class="p-1 text-neutral-700">{data.date.toLocaleDateString()}</td>
-										<td class="p-1 text-neutral-700">{data.ars_value}</td>
-										<td class="p-1 text-neutral-700">{data.currency_value}</td>
-										<td class="p-1 text-neutral-700">{data.usd_value}</td>
+										<td class="p-1 text-neutral-800">{data.date.toLocaleDateString()}</td>
+										<td class="p-1 text-neutral-800">{data.ars_value}</td>
+										<td class="p-1 text-neutral-800">{data.currency_value}</td>
+										<td class="p-1 text-neutral-800">{data.usd_value}</td>
 										<td class="p-2 flex items-center justify-center space-x-1">
 											<IconButton
 												size="h-5"
@@ -122,11 +127,11 @@
 						</table>
 					</div>
 				{:else}
-					<p class="text-center mb-3">No se han registrado pagos aún</p>
+					<p class="text-center mb-3 text-neutral-800">No se han registrado pagos aún</p>
 				{/if}
 			{/each}
 		{:else}
-			<p class="text-center">No se han registrado productos a pagar aún</p>
+			<p class="text-center text-neutral-800">No se han registrado productos a pagar aún</p>
 		{/if}
 	</div>
 </div>
@@ -139,6 +144,11 @@
 			rgba(245, 245, 245, 1) 50%,
 			rgba(245, 245, 245, 0) 100%
 		);
+	}
+	@media screen and (max-height: 642px) {
+		.fondo-translucent {
+			max-height: 50vh !important;
+		}
 	}
 	::-webkit-scrollbar {
 		width: 8px;

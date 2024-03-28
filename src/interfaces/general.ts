@@ -5,8 +5,7 @@ export interface dataOrder {
 	client: clientModel;
 	products?: productModel[];
 	revenues?: revenuesModel[];
-	payments?: paymentModel[];
-	taxes?: taxModel[];
+	payments?: paymentModel[];	
 	ars_value: number;
 	usd_value: number;
 	currency_value: number;
@@ -39,6 +38,7 @@ export interface productModel {
 	usd_value: number;
 	balance?: number;
 	payments: paymentModel[];
+	taxes: taxModel;
 }
 
 export interface revenuesModel {
@@ -59,11 +59,8 @@ export interface paymentModel {
 
 export interface taxModel {
 	id?: number;
-	exempt: number;
-	not_taxed: number;
-	aliquot_10: number;
-	aliquot_21: number;
-	total: number;
-	iva: number;
-	bi_iibb: number;
+	exempt?: number;
+	not_taxed?: number;
+	aliquot_10?: number;
+	aliquot_21?: number;
 }
