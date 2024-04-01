@@ -11,7 +11,7 @@
 
 	let row: number = 0;
 	let edit: boolean = false;
-	let load: boolean = true;
+	let load: boolean = false;
 
 	async function deleteClient(data: clientModel, index: number) {
 		load = true;
