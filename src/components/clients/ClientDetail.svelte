@@ -5,11 +5,39 @@
 	import Form from '../forms/Form.svelte';
 	import TableClient from './TableClient.svelte';
 	import type { clientModel } from '../../interfaces/general';
+	import { clientsHandler } from '../../store/store';
 
-    export let clients: clientModel[] = [];
+	export let clients: clientModel[] = [];
 
 	let add: boolean = false;
 	let search: string;
+	let filtered: clientModel[] = [];
+
+	$: {
+		if (search === '') {
+			clientsHandler.clear();
+			if (clients) {
+				clients.forEach((element: any) => {
+					clientsHandler.set(element);
+				});
+			}
+		} else {
+			termFilter();
+		}
+	}
+
+	function termFilter() {
+		filtered = clients.filter((clients: clientModel) => {
+			return (
+				clients.first_name.toLowerCase().includes(search) ||
+				clients.last_name.toLowerCase().includes(search)
+			);
+		});
+		clientsHandler.clear();
+		filtered.forEach((element: any) => {
+			clientsHandler.set(element);
+		});
+	}
 </script>
 
 <div class="w-2/3 h-full p-2 max-h-[85vh]">
@@ -31,4 +59,4 @@
 	<TableClient />
 </div>
 
-<Form bind:showModal={add} width='w-2/5' />
+<Form bind:showModal={add} width="w-2/5" />
