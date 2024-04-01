@@ -34,9 +34,11 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@types/uuid": "^9.0.8",
 		"firebase": "^10.9.0",
 		"svelte-forms-lib": "^2.0.1",
 		"svelte-material-icons": "^3.0.5",
+		"uuid": "^9.0.1",
 		"yup": "^1.4.0"
 	}
 }

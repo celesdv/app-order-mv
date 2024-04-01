@@ -5,7 +5,7 @@ export interface dataOrder {
 	client: clientModel;
 	products?: productModel[];
 	revenues?: revenuesModel[];
-	payments?: paymentModel[];	
+	payments?: paymentModel[];
 	ars_value: number;
 	usd_value: number;
 	currency_value: number;
@@ -14,19 +14,21 @@ export interface dataOrder {
 }
 
 export interface clientModel {
-	id?: number;
+	id?: string;
 	first_name: string;
 	last_name: string;
-	phone: number;
+	phone:string;
 	email: string;
-	adress: string;
+	address: string;
 	city: string;
 	observation: string;
+	soft_delete?: boolean;
 }
 
 export interface supplierModel {
-	id?: number;
+	id?: string;
 	name: string;
+	soft_delete?: boolean;
 }
 
 export interface productModel {

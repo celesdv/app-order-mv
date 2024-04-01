@@ -14,7 +14,8 @@
 			value: 150,
 			currency: 'USD',
 			payments: [],
-			usd_value: 150
+			usd_value: 150,
+			taxes:{}
 		}
 	];
 </script>

@@ -2,6 +2,7 @@
 	import Edit from 'svelte-material-icons/Pencil.svelte';
 	import Delete from 'svelte-material-icons/Delete.svelte';
 	import Save from 'svelte-material-icons/ContentSave.svelte';
+	import Close from 'svelte-material-icons/Close.svelte';
 	import IconButton from '../buttons/IconButton.svelte';
 	import type { productModel, taxModel } from '../../interfaces/general';
 
@@ -59,21 +60,30 @@
 		}
 	];
 
+	function aliquot(product: productModel, ali: number) {
+		let aliquot: number = 0;
+		if (product.taxes?.aliquot_10 && ali === 10)
+			aliquot = aliquot + product.taxes.aliquot_10 * 1.105;
+		if (product.taxes?.aliquot_21 && ali === 21)
+			aliquot = aliquot + product.taxes.aliquot_21 * 1.21;
+		return aliquot;
+	}
+
 	function total(product: productModel) {
 		let total: number = 0;
 		if (product.taxes?.exempt) total = total + product.taxes?.exempt;
 		if (product.taxes?.not_taxed) total = total + product.taxes?.not_taxed;
-		if (product.taxes?.aliquot_10) total = total + product.taxes?.aliquot_10;
-		if (product.taxes?.aliquot_21) total = total + product.taxes?.aliquot_21;
+		if (product.taxes?.aliquot_10) total = total + aliquot(product, 10);
+		if (product.taxes?.aliquot_21) total = total + aliquot(product, 21);
 		return total;
 	}
 
 	function IVA(product: productModel) {
 		let total: number = 0;
 		if (product.taxes?.aliquot_10)
-			total = total + (product.taxes?.aliquot_10 - product.taxes?.aliquot_10 / 1.105);
+			total = total + (aliquot(product, 10) - product.taxes?.aliquot_10);
 		if (product.taxes?.aliquot_21)
-			total = total + (product.taxes?.aliquot_21 - product.taxes?.aliquot_21 / 1.21);
+			total = total + (aliquot(product, 21) - product.taxes?.aliquot_21);
 		return total;
 	}
 
@@ -86,6 +96,15 @@
 		let total = 0;
 		if (element) total = total + element;
 		return total;
+	}
+
+	function deleteTax() {
+		console.log('Tax deleted');
+	}
+
+	function editTax() {
+		console.log('Tax edited');
+		edit = !edit;
 	}
 </script>
 
@@ -143,7 +162,7 @@
 											bind:value={product.taxes.aliquot_10}
 										/>
 									{:else}
-										{product.taxes?.aliquot_10 ? product.taxes?.aliquot_10 : ''}
+										{aliquot(product, 10) != 0 ? aliquot(product, 10).toFixed(2) : ''}
 									{/if}
 								</td>
 								<td class="p-1 text-neutral-800 text-center">
@@ -154,14 +173,14 @@
 											bind:value={product.taxes.aliquot_21}
 										/>
 									{:else}
-										{product.taxes?.aliquot_21 ? product.taxes?.aliquot_21 : ''}
+										{aliquot(product, 21) != 0 ? aliquot(product, 21).toFixed(2) : ''}
 									{/if}
 								</td>
 								<td class="p-1 text-neutral-800 text-center">
-									{total(product)}
+									{total(product).toFixed(2)}
 								</td>
 								<td class="p-1 text-neutral-800 text-center">
-									{IVA(product)}
+									{IVA(product).toFixed(2)}
 								</td>
 								<td class="p-1 text-neutral-800 text-center">
 									{product.supplier.name === 'Melcej Viajes'
@@ -169,27 +188,40 @@
 										: ''}
 								</td>
 								<td class="p-2 flex items-center justify-center space-x-1">
-									<IconButton
-										size="h-5"
-										variant="bg-gradient-to-b from-teal-500 to-teal-800 text-neutral-100"
-										on:click={() => {
-											(row = index), (edit = !edit);
-										}}
-									>
-										{#if edit && row === index}
+									{#if edit && row === index}
+										<IconButton
+											size="h-5"
+											variant="bg-gradient-to-b from-teal-500 to-teal-800 text-neutral-100"
+											on:click={editTax}
+										>
 											<Save />
-										{:else}
+										</IconButton>
+										<IconButton
+											size="h-5"
+											variant="bg-gradient-to-b from-amber-400 to-amber-800 text-neutral-100"
+											on:click={() => (edit = !edit)}
+										>
+											<Close />
+										</IconButton>
+									{:else}
+										<IconButton
+											size="h-5"
+											variant="bg-gradient-to-b from-teal-500 to-teal-800 text-neutral-100"
+											on:click={() => {
+												(row = index), (edit = !edit);
+											}}
+										>
 											<Edit />
-										{/if}
-									</IconButton>
-									<IconButton
-										size="h-5"
-										variant="bg-gradient-to-b from-red-400 to-red-800 text-neutral-100"
-										on:click={() => console.log('Ver')}
-									>
-										<Delete />
-									</IconButton></td
-								>
+										</IconButton>
+										<IconButton
+											size="h-5"
+											variant="bg-gradient-to-b from-red-400 to-red-800 text-neutral-100"
+											on:click={deleteTax}
+										>
+											<Delete />
+										</IconButton>
+									{/if}
+								</td>
 							</tr>
 						{/each}
 					{:else}
