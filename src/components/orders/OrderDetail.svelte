@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Accordion from '../accordions/Accordion.svelte';
+	import Accordion from '../shared/accordions/Accordion.svelte';
 </script>
 
 <div class="w-2/3 h-full p-2 max-h-[85vh]">

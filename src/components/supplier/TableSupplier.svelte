@@ -1,13 +1,13 @@
 <script lang="ts">
 	import { suppliersStore } from '../../store/store';
-	import IconButton from '../buttons/IconButton.svelte';
+	import IconButton from '../shared/buttons/IconButton.svelte';
 	import Edit from 'svelte-material-icons/Pencil.svelte';
 	import Delete from 'svelte-material-icons/Delete.svelte';
 	import Save from 'svelte-material-icons/ContentSave.svelte';
 	import Close from 'svelte-material-icons/Close.svelte';
 	import type { supplierModel } from '../../interfaces/general';
 	import { softDeleteSupplier, updateSupplier } from '$lib/service/serviceSuppliers';
-	import Spinner from '../loaders/spinner.svelte';
+	import Spinner from '../shared/loaders/spinner.svelte';
 
 	let row: number = 0;
 	let edit: boolean = false;

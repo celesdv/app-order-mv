@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Drop from 'svelte-material-icons/TrayArrowDown.svelte';
 	import Expand from 'svelte-material-icons/ArrowRight.svelte';
-	import IconButton from '../buttons/IconButton.svelte';
+	import IconButton from '../shared/buttons/IconButton.svelte';
 </script>
 
 <div class="relative max-h-[80%] overflow-y-auto">

@@ -5,9 +5,9 @@
 	import { saveSupplier } from '$lib/service/serviceSuppliers';
 	import { supplierSchema } from '../../interfaces/shemas';
 	import type { supplierModel } from '../../interfaces/general';
-	import Button from '../buttons/Button.svelte';
-	import Spinner from '../loaders/spinner.svelte';
-	import Input from '../inputs/Input.svelte';
+	import Button from '../shared/buttons/Button.svelte';
+	import Spinner from '../shared/loaders/spinner.svelte';
+	import Input from '../shared/inputs/Input.svelte';
 
 	export let added: boolean;
 	let load: boolean = false;

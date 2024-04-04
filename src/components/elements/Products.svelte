@@ -3,8 +3,8 @@
 	import Edit from 'svelte-material-icons/Pencil.svelte';
 	import Delete from 'svelte-material-icons/Delete.svelte';
 	import type { productModel } from '../../interfaces/general';
-	import IconButton from '../buttons/IconButton.svelte';
-	import SearchInput from '../inputs/SearchInput.svelte';
+	import IconButton from '../shared/buttons/IconButton.svelte';
+	import SearchInput from '../shared/inputs/SearchInput.svelte';
 
 	let products: productModel[] = [
 		{

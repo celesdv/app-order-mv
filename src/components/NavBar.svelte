@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { authHandlers } from "../store/store";
-	import Button from "./buttons/Button.svelte";
+	import Button from "./shared/buttons/Button.svelte";
 
     function logOut() {
         authHandlers.logout()

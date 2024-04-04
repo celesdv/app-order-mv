@@ -1,11 +1,11 @@
 <script lang="ts">
 	import { clientStore } from '../../store/store';
-	import IconButton from '../buttons/IconButton.svelte';
+	import IconButton from '../shared/buttons/IconButton.svelte';
 	import Edit from 'svelte-material-icons/Pencil.svelte';
 	import Delete from 'svelte-material-icons/Delete.svelte';
 	import Save from 'svelte-material-icons/ContentSave.svelte';
 	import Close from 'svelte-material-icons/Close.svelte';
-	import Spinner from '../loaders/spinner.svelte';
+	import Spinner from '../shared/loaders/spinner.svelte';
 	import type { clientModel } from '../../interfaces/general';
 	import { softDeleteClient, updateClient } from '$lib/service/serviceClients';
 

@@ -2,7 +2,7 @@
 	import Book from 'svelte-material-icons/BookAccount.svelte';
 	import Pencil from 'svelte-material-icons/Pencil.svelte';
 	import Save from 'svelte-material-icons/Send.svelte';
-	import IconButton from './../buttons/IconButton.svelte';
+	import IconButton from '../shared/buttons/IconButton.svelte';
 	import type { dataOrder } from './../../interfaces/general.ts';
 
 	let datos: dataOrder = {
@@ -12,9 +12,9 @@
 		client: {
 			first_name: 'Juan Pedro',
 			last_name: 'Fernandez',
-			phone: 2634625679,
+			phone: "2634625679",
 			email: 'email@email.com',
-			adress: 'Lamadrid 2525',
+			address: 'Lamadrid 2525',
 			city: 'Rivadavia',
 			observation: ''
 		},
@@ -101,7 +101,7 @@
 				<span class="text-sky-800 font-semibold">Domicilio:</span>
 				<input
 					type="email"
-					bind:value={datos.client.adress}
+					bind:value={datos.client.address}
 					class="grow p-1 bg-transparent"
 					{readonly}
 				/>

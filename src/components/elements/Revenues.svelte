@@ -2,7 +2,7 @@
 	import Plus from 'svelte-material-icons/Plus.svelte';
 	import Edit from 'svelte-material-icons/Pencil.svelte';
 	import Delete from 'svelte-material-icons/Delete.svelte';	
-	import IconButton from '../buttons/IconButton.svelte';
+	import IconButton from '../shared/buttons/IconButton.svelte';
 	import type { revenuesModel } from '../../interfaces/general';
 
 	let revenues: revenuesModel[] = [

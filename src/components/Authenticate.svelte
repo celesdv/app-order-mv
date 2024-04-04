@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { createForm } from 'svelte-forms-lib';
 	import * as yup from 'yup';
-	import Button from './buttons/Button.svelte';
+	import Button from './shared/buttons/Button.svelte';
 	import { authHandlers } from '../store/store';
-	import Spinner from './loaders/spinner.svelte';
+	import Spinner from './shared/loaders/spinner.svelte';
 
 	let disabled: boolean = true;
 	let loading: boolean = false;

@@ -1,7 +1,6 @@
 <script lang="ts">
-	import { accordionHandler } from '../../store/store';
+	import { accordionHandler } from '../../../store/store';
 	import IconButton from '../buttons/IconButton.svelte';
-	import Header from '../headers/Header.svelte';
 	import Arrow from 'svelte-material-icons/ArrowDown.svelte';
 
 	export let element: string = '';

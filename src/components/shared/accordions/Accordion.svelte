@@ -1,11 +1,11 @@
 <script lang="ts">
-	import { activoAccordion } from '../../store/store';
+	import { activoAccordion } from '../../../store/store';
+	import Data from '../../elements/Data.svelte';
+	import Payments from '../../elements/Payments.svelte';
+	import Products from '../../elements/Products.svelte';
+	import Revenues from '../../elements/Revenues.svelte';
+	import Taxes from '../../elements/Taxes.svelte';
 	import ItemAccordion from './ItemAccordion.svelte';
-	import Data from '../elements/Data.svelte';
-	import Products from '../elements/Products.svelte';
-	import Revenues from '../elements/Revenues.svelte';
-	import Payments from '../elements/Payments.svelte';
-	import Taxes from '../elements/Taxes.svelte';
 
 	export let sections: string[] = ['Datos Reserva', 'Productos', 'Cobros', 'Pagos', 'Impuestos'];
 </script>

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Plus from 'svelte-material-icons/Plus.svelte';
-	import IconButton from '../buttons/IconButton.svelte';
-	import SearchInput from '../inputs/SearchInput.svelte';
+	import IconButton from '../shared/buttons/IconButton.svelte';
+	import SearchInput from '../shared/inputs/SearchInput.svelte';
 	import TableSupplier from './TableSupplier.svelte';
 	import Form from '../forms/Form.svelte';
 	import type { supplierModel } from '../../interfaces/general';

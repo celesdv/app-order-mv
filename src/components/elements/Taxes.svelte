@@ -3,7 +3,7 @@
 	import Delete from 'svelte-material-icons/Delete.svelte';
 	import Save from 'svelte-material-icons/ContentSave.svelte';
 	import Close from 'svelte-material-icons/Close.svelte';
-	import IconButton from '../buttons/IconButton.svelte';
+	import IconButton from '../shared/buttons/IconButton.svelte';
 	import type { productModel, taxModel } from '../../interfaces/general';
 
 	let edit: boolean = false;

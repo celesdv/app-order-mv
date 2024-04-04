@@ -1,9 +1,9 @@
 <script lang="ts">
-	import { activeItem } from '../../store/store';
 	import FormSupplier from './FormSupplier.svelte';
-	import IconButton from '../buttons/IconButton.svelte';
 	import Close from 'svelte-material-icons/Close.svelte';
 	import FormClient from './FormClient.svelte';
+	import IconButton from '../shared/buttons/IconButton.svelte';
+	import { activeItem } from '../../store/store';
 
 	export let showModal: boolean;
 	export let width:string = 'w-96'

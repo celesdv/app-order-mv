@@ -1,11 +1,11 @@
 <script lang="ts">
 	import Plus from 'svelte-material-icons/Plus.svelte';
-	import IconButton from '../buttons/IconButton.svelte';
-	import SearchInput from '../inputs/SearchInput.svelte';
-	import Form from '../forms/Form.svelte';
+	import IconButton from '../shared/buttons/IconButton.svelte';
+	import SearchInput from '../shared/inputs/SearchInput.svelte';
 	import TableClient from './TableClient.svelte';
 	import type { clientModel } from '../../interfaces/general';
 	import { clientsHandler } from '../../store/store';
+	import Form from '../forms/Form.svelte';
 
 	export let clients: clientModel[] = [];
 

@@ -4,7 +4,7 @@
 	import NavBar from './../../components/NavBar.svelte';
 	import Footer from '../../components/Footer.svelte';
 	import Body from '../../components/Body.svelte';
-	import Spinner from '../../components/loaders/spinner.svelte';
+	import Spinner from '../../components/shared/loaders/spinner.svelte';
 </script>
 
 {#if !$authStore.loading}
