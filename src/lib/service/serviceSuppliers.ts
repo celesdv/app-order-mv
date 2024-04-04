@@ -52,13 +52,13 @@ export async function updateSupplier(data: supplierModel, index: number) {
 	return updated;
 }
 
-export async function softDeleteSupplier(data: supplierModel, index: number): Promise<boolean> {
+export async function softDeleteSupplier(dataSupplier: supplierModel, index: number): Promise<boolean> {
 	let deleted: boolean = false;
 	try {
-		const q = query(collection(db, 'suppliers'), where('id', '==', data.id));
+		const q = query(collection(db, 'suppliers'), where('id', '==', dataSupplier.id));
 		const querySnapshot = await getDocs(q);
 		querySnapshot.forEach((doc) => {
-			updateDoc(doc.ref, { ...data });
+			updateDoc(doc.ref, { ...dataSupplier });
 		});
 		suppliersHandler.delete(index);
 		deleted = true;

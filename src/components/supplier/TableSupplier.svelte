@@ -1,4 +1,5 @@
 <script lang="ts">
+	import ConfirmModal from './../shared/modals/confirmModal.svelte';
 	import { suppliersStore } from '../../store/store';
 	import IconButton from '../shared/buttons/IconButton.svelte';
 	import Edit from 'svelte-material-icons/Pencil.svelte';
@@ -12,21 +13,37 @@
 	let row: number = 0;
 	let edit: boolean = false;
 	let load: boolean = false;
+	let showModal: boolean = false;
+	let dataSupplier: supplierModel;
+	let indexSupplier: number;
+	let confirm: boolean = false;
 
-	async function deleteSupplier(data: supplierModel, index:number) {
+	function confirmDelete() {
+		showModal = true;
+	}
+
+	async function deleteSupplier() {
 		load = true;
-		data.soft_delete = true;
-		let sup = await softDeleteSupplier(data, index);
+		dataSupplier.soft_delete = true;
+		let sup = await softDeleteSupplier(dataSupplier, indexSupplier);
 		if (sup) load = false;
 	}
 
-	async function editSupplier(data: supplierModel, index:number) {
+	async function editSupplier(data: supplierModel, index: number) {
 		load = true;
 		let sup = await updateSupplier(data, index);
 		load = false;
 		edit = !edit;
 	}
+
+	$: if (confirm) deleteSupplier(), (confirm = false);
 </script>
+
+<ConfirmModal bind:showModal bind:confirm>
+	<div class="mb-2">
+		<h3 class="text-lg text-center">¿Desea eliminar el proveerdor?</h3>
+	</div>
+</ConfirmModal>
 
 <div class="tabla max-h-[34rem] h-[35rem] p-2">
 	<table class="w-full text-sm text-left text-gray-500">
@@ -86,7 +103,9 @@
 								<IconButton
 									size="h-5"
 									variant="bg-gradient-to-b from-red-400 to-red-800 text-neutral-100"
-									on:click={() => deleteSupplier(data, index)}
+									on:click={() => {
+										confirmDelete(), (dataSupplier = data), (indexSupplier = index);
+									}}
 								>
 									<Delete />
 								</IconButton>
