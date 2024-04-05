@@ -11,7 +11,6 @@
 	import type { clientModel } from '../../interfaces/general';
 	import TextArea from '../shared/inputs/TextArea.svelte';
 	import { updateClient } from '$lib/service/serviceClients';
-	import { afterUpdate, onMount } from 'svelte';
 
 	export let open: boolean = false;
 	export let index: number;
@@ -68,10 +67,10 @@
 	<aside
 		in:slide
 		out:slide
-		class="absolute top-0 right-0 w-1/3 h-full bg-neutral-100 border-r-2 shadow-lg"
+		class="absolute top-0 right-0 w-1/4 h-full bg-neutral-100 border-r-2 shadow-lg"
 	>
 		<div class="">
-			<IconButton size="h-6" variant="text-neutral-800" on:click={close}>
+			<IconButton size="h-9 w-9" variant="text-neutral-800" shadow='shadow-0' on:click={close}>
 				<Close size="2rem" />
 			</IconButton>
 		</div>

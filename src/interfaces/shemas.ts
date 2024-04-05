@@ -11,3 +11,9 @@ export const clientSchema = {
 	city: '',
 	observation: ''
 };
+
+export const orderSchema = {
+	client: undefined,
+	date: '',
+	currency:''
+};

@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { boolean } from 'yup';
 	import IconButton from '../shared/buttons/IconButton.svelte';
 	import Plus from 'svelte-material-icons/Plus.svelte';
 

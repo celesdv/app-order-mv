@@ -41,6 +41,6 @@
 	{:else if $activeItem === 2}
 		<FormClient bind:added />
 	{:else}
-		<FormOrder/>
+		<FormOrder bind:added/>
 	{/if}
 </dialog>

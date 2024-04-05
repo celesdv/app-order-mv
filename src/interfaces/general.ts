@@ -1,6 +1,6 @@
-export interface dataOrder {
-	id?: number;
-	order_name: string;
+export interface orderModel {
+	id?: string;
+	order_name?: string;
 	date: Date;
 	client: clientModel;
 	products?: productModel[];
@@ -8,7 +8,7 @@ export interface dataOrder {
 	payments?: paymentModel[];
 	ars_value: number;
 	usd_value: number;
-	currency_value: number;
+	currency_value: string;
 	total_revenues: number;
 	total_payments: number;
 }
