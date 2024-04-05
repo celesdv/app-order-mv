@@ -4,6 +4,7 @@
 	import FormClient from './FormClient.svelte';
 	import IconButton from '../shared/buttons/IconButton.svelte';
 	import { activeItem } from '../../store/store';
+	import FormOrder from './FormOrder.svelte';
 
 	export let showModal: boolean;
 	export let width: string = 'w-96';
@@ -40,6 +41,6 @@
 	{:else if $activeItem === 2}
 		<FormClient bind:added />
 	{:else}
-		fomr
+		<FormOrder/>
 	{/if}
 </dialog>
