@@ -6,6 +6,7 @@
 	export let type: string = 'text';
     export let maxlength:number=50
     export let classes:string=''
+	export let readonly:boolean = false
 
     $: if(type==='phone') value = value.replace(/[^0-9]/g, '');
 </script>
@@ -31,6 +32,7 @@
 			placeholder={label}
 			type="text"
 			class="w-full border-0 bg-transparent text-neutral-800 p-3 focus:outline-0 placeholder:text-neutral-800"
+			{readonly}
 		/>
 	{:else if type === 'email'}
 		<input
@@ -40,6 +42,7 @@
 			placeholder={label}
 			type="email"
 			class="w-full border-0 bg-transparent text-neutral-800 p-3 focus:outline-0 placeholder:text-neutral-800"
+			{readonly}
 		/>
 	{:else if type === 'phone'}
 		<input
@@ -49,6 +52,7 @@
 			bind:value
 			placeholder={label}
 			class="w-full border-0 bg-transparent text-neutral-800 p-3 focus:outline-0 placeholder:text-neutral-800"
+			{readonly}
 		/>
 	{/if}
 </label>

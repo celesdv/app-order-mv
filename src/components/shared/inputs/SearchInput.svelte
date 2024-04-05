@@ -2,9 +2,10 @@
 	import Search from 'svelte-material-icons/Magnify.svelte';
 
 	export let search: string = '';
+	export let width: string = 'w-1/3';
 </script>
 
-<div class="w-1/3 flex items-center relative h-full">
+<div class="{width} flex items-center relative h-full">
 	<input
 		type="text"
 		placeholder="Buscar"

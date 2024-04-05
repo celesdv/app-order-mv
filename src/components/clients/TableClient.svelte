@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { clientStore } from '../../store/store';
+	import Plus from 'svelte-material-icons/Plus.svelte';
 	import IconButton from '../shared/buttons/IconButton.svelte';
 	import Edit from 'svelte-material-icons/Pencil.svelte';
 	import Delete from 'svelte-material-icons/Delete.svelte';
@@ -8,15 +9,26 @@
 	import Spinner from '../shared/loaders/spinner.svelte';
 	import type { clientModel } from '../../interfaces/general';
 	import { softDeleteClient, updateClient } from '$lib/service/serviceClients';
+	import ConfirmModal from '../shared/modals/confirmModal.svelte';
+	import DrawerClient from './DrawerClient.svelte';
 
 	let row: number = 0;
 	let edit: boolean = false;
 	let load: boolean = false;
+	let showModal: boolean = false;
+	let dataClient: clientModel;
+	let indexClient: number;
+	let confirm: boolean = false;
+	let open = false;
 
-	async function deleteClient(data: clientModel, index: number) {
+	function confirmDelete() {
+		showModal = true;
+	}
+
+	async function deleteClient() {
 		load = true;
-		data.soft_delete = true;
-		let sup = await softDeleteClient(data, index);
+		dataClient.soft_delete = true;
+		let sup = await softDeleteClient(dataClient, indexClient);
 		if (sup) load = false;
 	}
 
@@ -26,27 +38,36 @@
 		load = false;
 		edit = !edit;
 	}
+
+	$: if (confirm) deleteClient(), (confirm = false);
 </script>
 
-<div class="tabla max-h-[34rem] h-[35rem] p-2">
-	<table class="w-full text-sm text-left text-gray-500">
+<ConfirmModal bind:showModal bind:confirm>
+	<div class="mb-2">
+		<h3 class="text-lg text-center">¿Desea eliminar el cliente?</h3>
+	</div>
+</ConfirmModal>
+
+<DrawerClient bind:open bind:dataClient index={indexClient}/>
+
+<div class="tabla max-w-full max-h-[34rem] h-[35rem] p-2">
+	<table class="w-full overflow-y-auto text-sm text-left text-gray-500">
 		<thead class="text-sky-800 uppercase text-center">
 			<tr>
-				<th scope="col" class="px-4 py-2 w-[10%]">Nombre</th>
-				<th scope="col" class="px-4 py-2 w-[10%]">Apellido</th>
-				<th scope="col" class="px-4 py-2 w-[10%]">Télefono</th>
+				<th scope="col" class="px-4 py-2 w-[20%]">Nombre</th>
+				<th scope="col" class="px-4 py-2 w-[20%]">Apellido</th>
+				<th scope="col" class="px-4 py-2 w-[20%]">Télefono</th>
 				<th scope="col" class="px-4 py-2 w-[20%]">Email</th>
-				<th scope="col" class="px-4 py-2 w-[20%]">Dirección</th>
-				<th scope="col" class="px-4 py-2 w-[10%]">Localidad</th>
-				<th scope="col" class="px-4 py-2 w-[10%]">Obs.</th>
-				<th scope="col" class="px-4 py-2 w-[10%]">Acciones</th>
+				<th scope="col" class="px-4 py-2 w-[20%]">Acciones</th>
 			</tr>
 		</thead>
 		<tbody>
 			{#if load}
 				<tr class="border-b border-neutral-100">
-					<td class="w-full flex justify-center" colspan="8">
-						<Spinner size="6rem" color="#f5f5f5" />
+					<td colspan="8">
+						<div class="w-full flex justify-center">
+							<Spinner size="6rem" color="#f5f5f5" />
+						</div>
 					</td>
 				</tr>
 			{:else if $clientStore.length > 0}
@@ -56,7 +77,7 @@
 							{#if edit && row === index}
 								<input
 									type="text"
-									class="w-full p-1 rounded-lg bg-gradient-to-b from-teal-500 to-teal-800 text-neutral-100 text-center border border-neutral-100"
+									class="w-full p-1 rounded-lg bg-transparent text-neutral-800 text-center border border-teal-800"
 									bind:value={data.first_name}
 								/>
 							{:else}
@@ -68,7 +89,7 @@
 							{#if edit && row === index}
 								<input
 									type="text"
-									class="w-full p-1 rounded-lg bg-gradient-to-b from-teal-500 to-teal-800 text-neutral-100 text-center border border-neutral-100"
+									class="w-full p-1 rounded-lg bg-transparent text-neutral-800 text-center border border-teal-800"
 									bind:value={data.last_name}
 								/>
 							{:else}
@@ -80,7 +101,7 @@
 							{#if edit && row === index}
 								<input
 									type="text"
-									class="w-full p-1 rounded-lg bg-gradient-to-b from-teal-500 to-teal-800 text-neutral-100 text-center border border-neutral-100"
+									class="w-full p-1 rounded-lg bg-transparent text-neutral-800 text-center border border-teal-800"
 									bind:value={data.phone}
 								/>
 							{:else}
@@ -92,47 +113,11 @@
 							{#if edit && row === index}
 								<input
 									type="text"
-									class="w-full p-1 rounded-lg bg-gradient-to-b from-teal-500 to-teal-800 text-neutral-100 text-center border border-neutral-100"
+									class="w-full p-1 rounded-lg bg-transparent text-neutral-800 text-center border border-teal-800"
 									bind:value={data.email}
 								/>
 							{:else}
 								{data.email}
-							{/if}
-						</td>
-
-						<td class="p-1 text-neutral-800 text-center">
-							{#if edit && row === index}
-								<input
-									type="text"
-									class="w-full p-1 rounded-lg bg-gradient-to-b from-teal-500 to-teal-800 text-neutral-100 text-center border border-neutral-100"
-									bind:value={data.address}
-								/>
-							{:else}
-								{data.address}
-							{/if}
-						</td>
-
-						<td class="p-1 text-neutral-800 text-center">
-							{#if edit && row === index}
-								<input
-									type="text"
-									class="w-full p-1 rounded-lg bg-gradient-to-b from-teal-500 to-teal-800 text-neutral-100 text-center border border-neutral-100"
-									bind:value={data.city}
-								/>
-							{:else}
-								{data.city}
-							{/if}
-						</td>
-
-						<td class="p-1 text-neutral-800 text-center">
-							{#if edit && row === index}
-								<input
-									type="text"
-									class="w-full p-1 rounded-lg bg-gradient-to-b from-teal-500 to-teal-800 text-neutral-100 text-center border border-neutral-100"
-									bind:value={data.observation}
-								/>
-							{:else}
-								{data.observation}
 							{/if}
 						</td>
 
@@ -165,9 +150,20 @@
 								<IconButton
 									size="h-5"
 									variant="bg-gradient-to-b from-red-400 to-red-800 text-neutral-100"
-									on:click={() => deleteClient(data, index)}
+									on:click={() => {
+										confirmDelete(), (dataClient = data), (indexClient = index);
+									}}
 								>
 									<Delete />
+								</IconButton>
+								<IconButton
+									size="h-5"
+									variant="bg-gradient-to-b from-neutral-400 to-neutral-800 text-neutral-100"
+									on:click={() => {
+										(open = true), (dataClient = data), (indexClient = index);
+									}}
+								>
+									<Plus />
 								</IconButton>
 							{/if}
 						</td>

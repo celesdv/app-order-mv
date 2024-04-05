@@ -24,7 +24,7 @@
 </script>
 
 <div class="flex-1 flex">
-	<div class="w-1/3 h-full p-2 max-h-[85vh]">
+	<div class="w-1/4 h-full p-2 max-h-[85vh]">
 		<Header title="Proveedores" on:click={() => handleClick(1)} />
 		<Header title="Clientes" on:click={() => handleClick(2)} />
 		<Header title="Reservas" showButton={false}/>

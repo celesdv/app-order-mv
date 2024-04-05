@@ -6,7 +6,7 @@
 	import { activeItem } from '../../store/store';
 
 	export let showModal: boolean;
-	export let width:string = 'w-96'
+	export let width: string = 'w-96';
 
 	let dialog: HTMLDialogElement;
 	let added: boolean = false;
@@ -39,5 +39,7 @@
 		<FormSupplier bind:added />
 	{:else if $activeItem === 2}
 		<FormClient bind:added />
+	{:else}
+		fomr
 	{/if}
 </dialog>
