@@ -1,4 +1,5 @@
 <script lang="ts">
+	import FormProducts from './orders/FormProducts.svelte';
 	import FormSupplier from './FormSupplier.svelte';
 	import Close from 'svelte-material-icons/Close.svelte';
 	import FormClient from './FormClient.svelte';
@@ -40,7 +41,9 @@
 		<FormSupplier bind:added />
 	{:else if $activeItem === 2}
 		<FormClient bind:added />
+	{:else if $activeItem === 5}
+		<FormProducts bind:added />
 	{:else}
-		<FormOrder bind:added/>
+		<FormOrder bind:added />
 	{/if}
 </dialog>

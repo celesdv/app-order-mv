@@ -17,3 +17,11 @@ export const orderSchema = {
 	date: '',
 	currency:''
 };
+
+export const productSchema = {
+	description: '',
+	supplier: '',
+	ars_value: 0,
+	currency: '',
+	usd_value: 0,
+}

@@ -1,7 +1,7 @@
 import { auth } from '$lib/firebase/firebase';
 import { writable } from 'svelte/store';
 import { signInWithEmailAndPassword, signOut } from 'firebase/auth';
-import type { clientModel, supplierModel } from '../interfaces/general';
+import type { clientModel, orderModel, supplierModel } from '../interfaces/general';
 
 //AUTH
 export const authStore = writable({
@@ -55,13 +55,13 @@ export const suppliersHandler = {
 			return value;
 		});
 	},
-	update: (index:number, supplier: supplierModel) => {
+	update: (index: number, supplier: supplierModel) => {
 		suppliersStore.update((value) => {
 			value.splice(index, 1, supplier);
 			return value;
 		});
 	},
-	delete: (index:number) => {
+	delete: (index: number) => {
 		suppliersStore.update((value) => {
 			value.splice(index, 1);
 			return value;
@@ -75,11 +75,10 @@ export const suppliersHandler = {
 	}
 };
 
-
 //CLIENTS
-const clients: clientModel[] =[]
+const clients: clientModel[] = [];
 
-export const clientStore = writable(clients)
+export const clientStore = writable(clients);
 
 export const clientsHandler = {
 	set: (client: clientModel) => {
@@ -88,13 +87,13 @@ export const clientsHandler = {
 			return value;
 		});
 	},
-	update: (index:number, client: clientModel) => {
+	update: (index: number, client: clientModel) => {
 		clientStore.update((value) => {
 			value.splice(index, 1, client);
 			return value;
 		});
 	},
-	delete: (index:number) => {
+	delete: (index: number) => {
 		clientStore.update((value) => {
 			value.splice(index, 1);
 			return value;
@@ -103,6 +102,72 @@ export const clientsHandler = {
 	clear: () => {
 		clientStore.update((value) => {
 			value = [];
+			return value;
+		});
+	}
+};
+
+//ORDERS
+const orders: orderModel[] = [];
+let order: orderModel = {
+	id: '',
+	date: null,
+	client: null,
+	ars_value: 0,
+	usd_value: 0,
+	currency: '',
+	total_revenues: 0,
+	total_payments: 0,
+	products:[],
+	revenues:[],
+	soft_delete:false
+};
+
+export const orderStore = writable(orders);
+export const activeOrderStore = writable(order);
+
+export const ordersHandler = {
+	set: (order: orderModel) => {
+		orderStore.update((value) => {
+			value.push(order);
+			return value;
+		});
+	},
+	update: (index: number, order: orderModel) => {
+		orderStore.update((value) => {
+			value.splice(index, 1, order);
+			return value;
+		});
+	},
+	delete: (index: number) => {
+		orderStore.update((value) => {
+			value.splice(index, 1);
+			return value;
+		});
+	},
+	clear: () => {
+		orderStore.update((value) => {
+			value = [];
+			return value;
+		});
+	},
+	get: (id: string) => {
+		let order: orderModel[] = [];
+		orderStore.update((value) => {
+			order = value.filter((or) => (or.id = id));
+			return value;
+		});
+		return order[0];
+	},
+	setOrder: (order: orderModel) => {
+		activeOrderStore.update((value) => {
+			value = order;
+			return value;
+		});
+	},
+	clearOrder: () => {
+		activeOrderStore.update((value) => {
+			value.id = '';
 			return value;
 		});
 	}

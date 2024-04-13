@@ -1,23 +1,22 @@
 export interface orderModel {
 	id?: string;
-	order_name?: string;
-	date: Date;
-	client: clientModel;
-	products?: productModel[];
-	revenues?: revenuesModel[];
-	payments?: paymentModel[];
+	date: Date | null;
+	client: clientModel | null;
+	products: productModel[];
+	revenues: revenuesModel[];
 	ars_value: number;
 	usd_value: number;
-	currency_value: string;
+	currency: string;
 	total_revenues: number;
 	total_payments: number;
+	soft_delete: boolean;
 }
 
 export interface clientModel {
 	id?: string;
 	first_name: string;
 	last_name: string;
-	phone:string;
+	phone: string;
 	email: string;
 	address: string;
 	city: string;
@@ -32,15 +31,16 @@ export interface supplierModel {
 }
 
 export interface productModel {
-	id?: number;
+	id?: string;
 	description: string;
 	supplier: supplierModel;
 	value: number;
 	currency: string;
 	usd_value: number;
-	balance?: number;
+	balance: number;
+	soft_delete: boolean;
+	taxes: taxModel | null;
 	payments: paymentModel[];
-	taxes: taxModel;
 }
 
 export interface revenuesModel {

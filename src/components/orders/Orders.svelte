@@ -4,7 +4,7 @@
 	import SearchInput from '../shared/inputs/SearchInput.svelte';
 	import TableOrders from './TableOrders.svelte';
 	import Form from '../forms/Form.svelte';
-	import { itemHandler } from '../../store/store';
+	import { itemHandler, ordersHandler } from '../../store/store';
 
 	let add: boolean = false;
 	let search: string;

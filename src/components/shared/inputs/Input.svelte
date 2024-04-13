@@ -1,7 +1,4 @@
 <script lang="ts">
-	import { onMount } from "svelte";
-	import Data from "../../elements/Data.svelte";
-
 	export let id: string = '';
 	export let label: string = '';
 	export let error: string = '';
@@ -9,7 +6,9 @@
 	export let type: string = 'text';
 	export let maxlength: number = 50;
 	export let classes: string = '';
-	export let readonly: boolean = false;	
+	export let readonly: boolean = false;
+	export let min:string=''
+	export let max:string=''
 
 	$: if (type === 'phone') value = value.replace(/[^0-9]/g, '');
 </script>
@@ -51,6 +50,18 @@
 		<input
 			{id}
 			{maxlength}
+			on:change
+			bind:value
+			placeholder={label}
+			class="w-full border-0 bg-transparent text-neutral-800 p-3 focus:outline-0 placeholder:text-neutral-800"
+			{readonly}
+		/>
+	{:else if type === 'number'}
+		<input
+			type="number"
+			{id}
+			min={min}
+			max={max}
 			on:change
 			bind:value
 			placeholder={label}

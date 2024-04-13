@@ -34,9 +34,12 @@
 			client: values.client,
 			ars_value: 0,
 			usd_value: 0,
-			currency_value: values.currency,
+			currency: values.currency,
 			total_revenues: 0,
-			total_payments: 0
+			total_payments: 0,
+			products:[],
+			revenues:[],
+			soft_delete: false
 		};
 		let ord = await saveOrder(order);
 		if (ord) {

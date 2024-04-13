@@ -38,6 +38,23 @@
 				>
 			{/each}
 		</select>
+	{:else if type === 'supplier'}
+		<select
+			{id}
+			class="w-full border-0 bg-transparent text-neutral-800 p-3 focus:outline-0 placeholder:text-neutral-800"
+			bind:value={selected}
+		>
+			{#if label}
+				<option class="bg-secondary-500 text-tertiary-500" disabled selected hidden value=""
+					>{label}</option
+				>
+			{/if}
+			{#each options as option (option)}
+				<option class="bg-secondary-500 text-tertiary-500 leading-7" value={option}>
+					{option.name}</option
+				>
+			{/each}
+		</select>
 	{:else}
 		<select
 			{id}

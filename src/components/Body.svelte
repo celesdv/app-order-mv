@@ -1,26 +1,31 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { activeItem, itemHandler, suppliersHandler } from '../store/store';
+	import { activeItem, activeOrderStore, itemHandler, orderStore } from '../store/store';
 	import OrderDetail from './orders/OrderDetail.svelte';
 	import Orders from './orders/Orders.svelte';
-	import SupplierDetail from './supplier/SupplierDetail.svelte';
-	import { getSuppliers } from '$lib/service/serviceSuppliers';
-	import type { clientModel, supplierModel } from '../interfaces/general';
+	import SupplierDetail from './supplier/SupplierDetail.svelte';	
 	import ClientDetail from './clients/ClientDetail.svelte';
 	import Header from '../components/headers/Header.svelte';
 	import { getClients } from '$lib/service/serviceClients';
+	import { getOrders } from '$lib/service/serviceOrder.js';
+	import { getSuppliers } from '$lib/service/serviceSuppliers';
+	import type { clientModel, supplierModel, orderModel } from '../interfaces/general';
 
 	let suppliers: supplierModel[] = [];
 	let clients: clientModel[] = [];
+	let orders: orderModel[] =[]
 
 	onMount(async () => {
 		suppliers = await getSuppliers();
 		clients = await getClients();
+		await getOrders();
 	});
 
 	function handleClick(item: number) {
 		itemHandler.set(item);
 	}
+
+	$: console.log($orderStore)
 </script>
 
 <div class="flex-1 flex">
@@ -35,7 +40,7 @@
 		<SupplierDetail bind:suppliers />
 	{:else if $activeItem === 2}
 		<ClientDetail bind:clients />
-	{:else}
+	{:else if $activeOrderStore.id != ''}
 		<OrderDetail />
 	{/if}
 </div>

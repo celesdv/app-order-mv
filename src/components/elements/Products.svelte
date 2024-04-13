@@ -5,26 +5,25 @@
 	import type { productModel } from '../../interfaces/general';
 	import IconButton from '../shared/buttons/IconButton.svelte';
 	import SearchInput from '../shared/inputs/SearchInput.svelte';
+	import { activeOrderStore, itemHandler } from '../../store/store';
+	import Form from '../forms/Form.svelte';
 
-	let products: productModel[] = [
-		{
-			id: 1,
-			description: 'aaa',
-			supplier: { name: 'Mitika' },
-			value: 150,
-			currency: 'USD',
-			payments: [],
-			usd_value: 150,
-			taxes:{}
-		}
-	];
+	let add: boolean = false;
+
+	function openForm() {
+		itemHandler.set(5);
+		add = !add;
+	}
 </script>
+
+<Form bind:showModal={add} />
 
 <div class="px-2">
 	<div class="p-2 fondo-translucent">
 		<div class="flex justify-between">
 			<SearchInput />
 			<IconButton
+				on:click={openForm}
 				variant="flex items-center justify-center min-w-28 p-2 space-x-1 bg-gradient-to-b from-sky-900 to-sky-600 text-neutral-100 shadow-lg"
 			>
 				<Plus />
@@ -44,8 +43,8 @@
 					</tr>
 				</thead>
 				<tbody>
-					{#if products.length > 0}
-						{#each products as product}
+					{#if $activeOrderStore.products.length > 0}
+						{#each $activeOrderStore.products as product}
 							<tr class="border-b border-neutral-100">
 								<td class="p-1 ps-4 text-neutral-800">{product.description}</td>
 								<td class="p-1 text-neutral-800">{product.supplier.name}</td>
@@ -73,7 +72,7 @@
 							</tr>{/each}
 					{:else}
 						<tr class="border-b border-neutral-100">
-							<td class="p-1 text-neutral-800 text-center" colspan="4"
+							<td class="p-1 text-neutral-800 text-center" colspan="6"
 								>No hay productos añadidos aún</td
 							>
 						</tr>
@@ -86,10 +85,10 @@
 
 <style>
 	@media screen and (max-height: 642px) {
-        .tabla {
-            max-height: 40vh !important;
-        }
-    }
+		.tabla {
+			max-height: 40vh !important;
+		}
+	}
 	.fondo-translucent {
 		background: linear-gradient(
 			90deg,
